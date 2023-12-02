@@ -8,144 +8,58 @@ import java.util.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class Day1 {
-    static int firstindex = 0;
-    static int secondindex = 0;
+    static Vector<Integer> p1;
+    static Vector<Integer> p2;
 
     static List<String> nmbrlist = Arrays.asList("one", "two", "three", "four", "five", "six", "seven", "eight", "nine");
 
     public static void main(String[] args) throws IOException {
+        p1 = new Vector<>();
+        p2 = new Vector<>();
         File myObj = new File("/Users/alicewesterberg/advent-of-code-2023/day1/input2.txt");
         File test = new File("/Users/alicewesterberg/advent-of-code-2023/day1/test.txt");
         List<String> fileContent = Files.readAllLines(myObj.toPath(), UTF_8);
         List<String> testfileContent = Files.readAllLines(test.toPath(), UTF_8);
-        System.out.print(problem2(fileContent));
+        problem1(fileContent);
 
     }
 //54627
 
-    public static int problem1(List<String> list) {
-        Vector<Integer> numbers = new Vector<>();
-        int firstnumber = 0;
-        int secondnumber = 0;
-        boolean firstfound = false;
-        boolean secondfound = false;
+    public static void problem1(List<String> list) {
+        Vector<String> nmbrs = new Vector<>(nmbrlist);
         for (String s : list) {
+            Vector<Character> p1_digits = new Vector<>();
+            Vector<Character> p2_digits = new Vector<>();
             for (int i = 0; i < s.length(); i++) {
-                if (Character.isDigit(s.charAt(i)) && (!firstfound)) {
-                    firstnumber = Character.getNumericValue(s.charAt(i));
-                    firstfound = !firstfound;
-                    firstindex = i;
-
-
-
+                if (Character.isDigit(s.charAt(i))) {
+                    p1_digits.add(s.charAt(i));
+                    p2_digits.add(s.charAt(i));
                 }
-                char ch = s.charAt(s.length() - 1 - i);
-                if (Character.isDigit(ch) && (!secondfound)) {
-                    secondnumber = Character.getNumericValue(ch);
-                    secondfound = !secondfound;
-                    secondindex = s.length() - 1 - i;
-
+                for (String sub: nmbrs) {
+                    if (s.substring(i).startsWith(sub)){
+                        p2_digits.add(Character.forDigit(nmbrs.indexOf(sub) + 1,10));
+                    }
                 }
             }
-            numbers.add((firstnumber * 10 + secondnumber));
-            firstfound = false;
-            secondfound = false;
-            firstnumber = 0;
-            secondnumber = 0;
+            // Check if p1_digits has at least two elements
+            //String toAdd = p1_digits.get(0) + "" + p1_digits.lastElement();
+            String toAdd2 = p2_digits.get(0) + "" + p2_digits.lastElement();
+
+            //System.out.println("toAdd: " + toAdd);
+            System.out.println("toAdd2: " + toAdd2);
+
+            //p1.add(Integer.parseInt(toAdd));
+            p2.add(Integer.parseInt(toAdd2));
 
         }
-
-        return numbers.stream()
+        System.out.println( p1.stream()
                 .mapToInt(Integer::valueOf)
-                .sum();
+                .sum());
 
-
+        System.out.println( p2.stream()
+                .mapToInt(Integer::valueOf)
+                .sum());
     }
-
-    public static int problem2(List<String> list) {
-        Vector<Integer> numbers = new Vector<>();
-        int firstnumber = 0;
-        int secondnumber = 0;
-        boolean firstfound = false;
-        boolean secondfound = false;
-        for (String s : list) {
-            for (int i = 0; i < s.length(); i++) {
-                if (Character.isDigit(s.charAt(i)) && (!firstfound)) {
-                    firstnumber = Character.getNumericValue(s.charAt(i));
-                    firstfound = true;
-                    firstindex = i;
-                    if (findlowernumbers(s, firstindex) != -1){
-                        firstnumber = findlowernumbers(s, firstindex);
-                    }
-                    
-
-
-                }
-                char ch = s.charAt(s.length() - 1 - i);
-                if (Character.isDigit(ch) && (!secondfound)) {
-                    secondnumber = Character.getNumericValue(ch);
-                    secondfound = true;
-                    secondindex = s.length() - 1 - i;
-                    if (findhighernumbers(s, secondindex) != -1){
-                        secondnumber = findhighernumbers(s, secondindex);
-                    }
-
-                }
-            }
-            numbers.add((firstnumber * 10 + secondnumber));
-            System.out.println((firstnumber * 10 + secondnumber) + " " + s + " " + numbers.stream()
-                    .mapToInt(Integer::valueOf)
-                    .sum());
-            firstfound = false;
-            secondfound = false;
-            firstnumber = 0;
-            secondnumber = 0;
-
-        
-        }
-
-        return numbers.stream()
-                .mapToInt(Integer::valueOf)
-                .sum();
-
-                
-            
-            
-        }
-
-
-
-        public static int findlowernumbers(String s, int place){
-            Vector<String> nmbrs = new Vector<String>(nmbrlist);
-            int res = -1;
-            int resind = 9;
-            for (int index = 0; index < 9; index++) {
-                int i = s.indexOf(nmbrs.get(index));
-                if (i < place && !(i < 0) && i < resind) {
-                    res = convert(s.substring(i, i+nmbrs.get(index).length()));
-                    resind = i;
-                }
-            }
-            return res;
-        }
-
-        public static int findhighernumbers(String s, int place){
-            Vector<String> nmbrs = new Vector<String>(nmbrlist);
-            int res =-1;
-            int resind = 0;
-            for (int index = 0; index < 9; index++) {
-                int i = s.lastIndexOf(nmbrs.get(index));
-                if (i > place && !(i < 0) && i > resind) {
-                    res = convert(s.substring(i, i+nmbrs.get(index).length()));
-                    resind = i;
-
-                }
-            }
-            return res;
-        }
-
-    
-
 
         public static int convert (String s){
             return switch (s) {
@@ -164,7 +78,3 @@ public class Day1 {
 
 
     }
-
-
-
-
