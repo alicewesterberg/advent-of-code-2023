@@ -41,14 +41,13 @@ public class Day1 {
                     }
                 }
             }
-            // Check if p1_digits has at least two elements
-            //String toAdd = p1_digits.get(0) + "" + p1_digits.lastElement();
+            String toAdd = p1_digits.get(0) + "" + p1_digits.lastElement();
             String toAdd2 = p2_digits.get(0) + "" + p2_digits.lastElement();
 
-            //System.out.println("toAdd: " + toAdd);
+            System.out.println("toAdd: " + toAdd);
             System.out.println("toAdd2: " + toAdd2);
 
-            //p1.add(Integer.parseInt(toAdd));
+            p1.add(Integer.parseInt(toAdd));
             p2.add(Integer.parseInt(toAdd2));
 
         }
