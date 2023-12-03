@@ -23,41 +23,60 @@ public class Day3 {
         int R = matrix.length;
         int C = matrix[0].length;
 
+
         int res1 = 0;
+        int res2 = 0;
+        HashMap<String, ArrayList<Integer>> map = new HashMap<>();
 
         for (int r = 0; r < R; r++) { //for all rows
             int n = 0; // the number to add
             boolean exist = false; // check if it should calculate
+            HashSet<String> gears = new HashSet<>();
 
             for (int c = 0; c <= C; c++) { //for all columns
                 if (c < C && Character.isDigit(matrix[r][c].charAt(0))) { // test if c is within C and not the end and is digit
                     n = n * 10 + Character.getNumericValue(matrix[r][c].charAt(0)); //add to n according left to right
                     for (int rr = -1; rr <= 1; rr++) { // for (rows) 1 before and after
                         for (int cc = -1; cc <= 1; cc++) { // for colums one before and after
-                            //checking every one around
+                            //checking every one around for special characters
                             if (0 <= r + rr && r + rr < R && 0 <= c + cc && c + cc < C) { // check that it is within dimensions
                                 char ch = matrix[r + rr][c + cc].charAt(0); // get char before, and after
                                 if (!Character.isDigit(ch) && ch != '.') { // if it's not digit and not .
-                                    exist = true;
+                                    exist = true; //if special character exist = true
+                                }
+                                if (ch == '*') {
+                                    gears.add(r+rr + "," + c+cc);
                                 }
                             }
                         }
                     }
                 } else if (n > 0) { //if n is bigger than zero
+                    for (String gear : gears) {
+                        map.computeIfAbsent(gear, k -> new ArrayList<>()).add(n);
+                    }
                     if (exist) { // if exist
                         res1 += n; //add n to res1
                     }
+
                     n = 0; // reset everything
                     exist = false;
+                    gears.clear();
+
+
                 }
             }
-        }
 
+        }
         System.out.println(res1);
-    }
+        for (List<Integer> values : map.values()) {
+            if (values.size() == 2) {
+                res2 += values.get(0) * values.get(1);
+            }
+        }
+        System.out.println(res2);
 
 
 //Character.isDigit(matrix[row][cols].charAt(0))
 
-
+    }
 }
