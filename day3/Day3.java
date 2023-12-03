@@ -31,7 +31,7 @@ public class Day3 {
         for (int r = 0; r < R; r++) { //for all rows
             int n = 0; // the number to add
             boolean exist = false; // check if it should calculate
-            HashSet<String> gears = new HashSet<>();
+            String coordinates = "";
 
             for (int c = 0; c <= C; c++) { //for all columns
                 if (c < C && Character.isDigit(matrix[r][c].charAt(0))) { // test if c is within C and not the end and is digit
@@ -45,22 +45,21 @@ public class Day3 {
                                     exist = true; //if special character exist = true
                                 }
                                 if (ch == '*') {
-                                    gears.add(r+rr + "," + c+cc);
+                                    coordinates = (r + rr) + "," + (c + cc);
                                 }
                             }
                         }
                     }
-                } else if (n > 0) { //if n is bigger than zero
-                    for (String gear : gears) {
-                        map.computeIfAbsent(gear, k -> new ArrayList<>()).add(n);
-                    }
+                } else if (n > 0) {
+                    map.computeIfAbsent(coordinates, k -> new ArrayList<>()).add(n);
+
                     if (exist) { // if exist
                         res1 += n; //add n to res1
                     }
 
                     n = 0; // reset everything
                     exist = false;
-                    gears.clear();
+                    coordinates = "";
 
 
                 }
@@ -71,6 +70,7 @@ public class Day3 {
         for (List<Integer> values : map.values()) {
             if (values.size() == 2) {
                 res2 += values.get(0) * values.get(1);
+                System.out.println(res2);
             }
         }
         System.out.println(res2);
