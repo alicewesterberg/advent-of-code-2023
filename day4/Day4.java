@@ -34,22 +34,15 @@ public class Day4 {
             mylist.add(myset);
         }
         int n = 0;
-        /*for (int i = 0; i < winninglist.size(); i++){
+        int[] freq = new int[winninglist.size()];
+        for (int i = 0; i < winninglist.size(); i++){
+            freq[i] += 1;
             winninglist.get(i).retainAll(mylist.get(i));
             int j = winninglist.get(i).size();
             n = n + (int)Math.pow(2,j-1);
-        }
-         */
-        int[] freq = new int[winninglist.size()];
-        for (int i = 0; i < mylist.size(); i++){
-            freq[i] += 1; //plussa med vår lott
-            int cards = freq[i]; //hämta antal lotter vi har
-            winninglist.get(i).retainAll(mylist.get(i)); //intersection
-            int j = winninglist.get(i).size();
             for (int k = 1; k<=j; k++){
                 freq[i+k] += freq[i];
             }
-
         }
         int sum = 0;
         for (int i = 0; i < freq.length; i++)
