@@ -26,7 +26,7 @@ public class Day4 {
                 }
             }
             for (String s2: yourNums){
-                if (!s2.equals("")) {
+                if (!s2.isEmpty()) {
                     myset.add(Integer.parseInt(s2));
                 }
             }
