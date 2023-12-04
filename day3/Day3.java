@@ -70,7 +70,6 @@ public class Day3 {
         for (List<Integer> values : map.values()) {
             if (values.size() == 2) {
                 res2 += values.get(0) * values.get(1);
-                System.out.println(res2);
             }
         }
         System.out.println(res2);
