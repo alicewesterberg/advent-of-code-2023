@@ -29,14 +29,12 @@ public class Day5 {
         for (String s: seeds){
             seedtosoil.put(Long.parseLong(s),Long.parseLong(s));
         }
-        int antal = 0;
         for (String str: fileContent){
             String s = str.split(":")[0];
             if (s.isEmpty()){
                 index++;
             } else if (Character.isDigit(s.charAt(0))){
                 String[] number = s.split(" ");
-                antal++;
                 for(String seed: seeds) {
                     current = Long.parseLong(seed);
                     for (int i = 0; i< index; i++){
