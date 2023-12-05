@@ -31,7 +31,7 @@ public class Day5 {
         listofthings.add(humtoloc);
         Long seedNumber;
         for (String s: seeds){
-            seedtosoil.put(Long.parseLong(s),(long) 0);
+            seedtosoil.put(Long.parseLong(s),Long.parseLong(s));
         }
         for (String str: fileContent){
             String s = str.split(":")[0];
@@ -42,8 +42,9 @@ public class Day5 {
                 for(String seed: seeds) {
                     seedNumber = Long.parseLong(seed);
                     if (index != 0){
-                        for (int i = 0; i<= index; i++){
+                        for (int i = 0; i< index; i++){
                             seedNumber = listofthings.get(i).get(seedNumber);
+                            System.out.println(seedNumber);
 
                         }
                     }
@@ -56,9 +57,15 @@ public class Day5 {
 
             }
         }
+        Long min = Long.MAX_VALUE;
+        for (long value: humtoloc.values()){
+            if (value < min){
+                min = value;
 
+            }
+        }
+        System.out.println(min);
 
-        System.out.println(seedtosoil);
     }
 }
 
