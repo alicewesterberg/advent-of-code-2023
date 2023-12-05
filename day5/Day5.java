@@ -35,7 +35,6 @@ public class Day5 {
         }
         for (String str: fileContent){
             String s = str.split(":")[0];
-            //System.out.println(s);
             if (s.isEmpty()){
                 index++;
             } else if (Character.isDigit(s.charAt(0))){
@@ -43,27 +42,23 @@ public class Day5 {
                 for(String seed: seeds) {
                     seedNumber = Long.parseLong(seed);
                     if (index != 0){
-                        for (int i = 0; i< index; i++){
+                        for (int i = 0; i<= index; i++){
                             seedNumber = listofthings.get(i).get(seedNumber);
-                            System.out.println(seedNumber + " " + index);
 
                         }
                     }
-                    Long seedInterval1 = Math.min(Long.parseLong(number[0]), Long.parseLong(number[1]));
-                    Long seedInterval2 = Math.max(Long.parseLong(number[0]),Long.parseLong(number[1]));
-                    if(seedNumber <= seedInterval2 && seedNumber >= seedInterval1){
+                    Long seedInterval1 = Long.parseLong(number[1]);
+                    Long seedInterval2 = Long.parseLong(number[1]) + Long.parseLong(number[2]);
+                    if(seedNumber != null && seedNumber <= seedInterval2 && seedNumber >= seedInterval1){
                         listofthings.get(index).put(seedNumber,seedNumber+Long.parseLong(number[2]));
                     }
-
-
                 }
 
             }
-        //System.out.println(humtoloc);
         }
 
 
-
+        System.out.println(soiltofert);
     }
 }
 
