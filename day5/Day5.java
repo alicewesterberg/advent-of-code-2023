@@ -50,7 +50,7 @@ public class Day5 {
                     Long seedInterval1 = Long.parseLong(number[1]);
                     Long seedInterval2 = Long.parseLong(number[1]) + Long.parseLong(number[2]);
                     if(seedNumber != null && seedNumber <= seedInterval2 && seedNumber >= seedInterval1){
-                        listofthings.get(index).put(seedNumber,seedNumber+Long.parseLong(number[2]));
+                        listofthings.get(index).put(seedNumber,seedNumber+Long.parseLong(number[0]) - seedInterval1 );
                     }
                 }
 
@@ -58,7 +58,7 @@ public class Day5 {
         }
 
 
-        System.out.println(soiltofert);
+        System.out.println(seedtosoil);
     }
 }
 
