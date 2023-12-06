@@ -52,16 +52,12 @@ public class Day3 {
                     }
                 } else if (n > 0) {
                     map.computeIfAbsent(coordinates, k -> new ArrayList<>()).add(n);
-
                     if (exist) { // if exist
                         res1 += n; //add n to res1
                     }
-
                     n = 0; // reset everything
                     exist = false;
                     coordinates = "";
-
-
                 }
             }
 
@@ -73,8 +69,6 @@ public class Day3 {
             }
         }
         System.out.println(res2);
-
-
 //Character.isDigit(matrix[row][cols].charAt(0))
 
     }

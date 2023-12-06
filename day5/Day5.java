@@ -39,15 +39,11 @@ public class Day5 {
                     current = Long.parseLong(seed);
                     for (int i = 0; i< index; i++){
                         current = listofthings.get(i).get(current);
-
                     }
-
-
                     Long seedInterval1 = Long.parseLong(number[1]);
                     Long seedInterval2 = Long.parseLong(number[1]) + Long.parseLong(number[2]);
                     if(current != null && current < seedInterval2 && current >= seedInterval1){
                         listofthings.get(index).put(current,current+Long.parseLong(number[0]) - seedInterval1 );
-                        System.out.println("i: "+ index + " current: "+ current + " put: " + (current+Long.parseLong(number[0]) - seedInterval1));
                     } else {
                         if (!listofthings.get(index).containsKey(current)) {
                             listofthings.get(index).put(current, current);
@@ -63,12 +59,8 @@ public class Day5 {
             //System.out.println(value);
             if (value < min){
                 min = value;
-
             }
         }
         System.out.println(min);
-
     }
 }
-
-
